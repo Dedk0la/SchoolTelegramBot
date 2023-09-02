@@ -8,7 +8,7 @@ bot = telebot.TeleBot(config.TOKEN)
 
 tems = ["Бінарний Пошук", "Щось ще", "І ще щось"]
 
-# Создаем переменную для хранения состояния пользователя (в меню тестирования кода или нет)
+
 user_state = {}
 
 
@@ -26,13 +26,13 @@ def star(message):
 
 @bot.message_handler(func=lambda message: message.text == 'Протестувати код')
 def start_test(message):
-    user_state[message.chat.id] = "testing"  # Устанавливаем состояние пользователя в "тестирование кода"
+    user_state[message.chat.id] = "testing"
 
     markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
     item_start = types.KeyboardButton('Тестувати код')
     item_back = types.KeyboardButton('Назад до меню')
     markup.add(item_back, item_start)
-    bot.send_message(message.chat.id, "Меею для тесту кода:", reply_markup=markup)
+    bot.send_message(message.chat.id, "Меню для тесту кода:", reply_markup=markup)
 
 
 @bot.message_handler(
@@ -59,7 +59,7 @@ def handle_code_execution(message):
 
 @bot.message_handler(func=lambda message: message.text == "Назад до меню")
 def back_to_menu(message):
-    user_state[message.chat.id] = None  # Сбрасываем состояние пользователя
+    user_state[message.chat.id] = None
     markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
     item_help = types.KeyboardButton('Help')
     item_promlems = types.KeyboardButton('Почати вирішувати задачи')
